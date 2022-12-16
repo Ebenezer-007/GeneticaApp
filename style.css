@@ -1,0 +1,42 @@
+#Generate {
+	background-color: green
+	}
+
+#Cross {
+	background-color: green
+}
+
+#gamete_m {
+	color: blue;
+	font-size: 15px;
+	font-style: bold;
+	font-family: Verdana;
+	word-wrap: break-word;
+}
+
+#progeny {
+	color: blue;
+	font-size: 18px;
+	font-style: bold;
+	font-family: Verdana;
+	word-wrap: break-word;
+}
+
+#dom {
+	color: orange;
+	font-size: 14px;
+	font-style: bold;
+	font-family: Verdana;
+}
+
+#pheno {
+	background-color: green
+}
+
+#pheno_ratio {
+	color: blue;
+	font-size: 15px;
+	font-style: bold;
+	font-family: Verdana;
+	word-wrap: break-word;
+}

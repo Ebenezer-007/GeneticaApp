@@ -20,16 +20,12 @@ ui <- fluidPage(theme = shinytheme("united"),
       shinyjs::useShinyjs(),
             
      tabsetPanel(
-              
+      tabPanel("Welcome",
+                includeHTML("www/index.html"),
+                tags$head(includeCSS("style.css")),
+      ), 
+      
       tabPanel("Cross",
-      # Application description
-      h4(tags$b(div('This app generates the genotypes of progenies of genetic 
-                    crosses for any number of gene loci in DIPLOID species.')), 
-                          style = 'color: black;',align = 'center'),
-                       
-   hr(),
-   
-   h3(tags$strong("GENETICA"), style = 'color: green', align = 'center'),
    
    fluidRow(
      
@@ -51,12 +47,8 @@ ui <- fluidPage(theme = shinytheme("united"),
         textInput("Geno_p", "Enter genotype of paternal parent:",
                   value = "AaBb"),
         
-        tags$head(
-          tags$style(HTML('#Generate{background-color: green}'))),
         actionButton("Generate", "Generate gametes", icon("sync")),
-        
-        tags$head(
-          tags$style(HTML('#Cross{background-color: green}'))),
+
         actionButton("Cross", "Cross parents", icon("times")),
         
  ),
@@ -69,28 +61,12 @@ ui <- fluidPage(theme = shinytheme("united"),
  div(
    column(6,
           
-  tags$head(tags$style("#gamete_m{color: blue;
-  font-size: 15px;
-  font-style: bold;
-  font-family: Verdana;
-  word-wrap: break-word;
-  }"
-                                               
-    )),
                           
   h4(tags$strong("Maternal gamete(s):"),
      br(), br(),
      htmlOutput("gamete_m")), 
   
   tags$br(),
-  tags$head(tags$style("#gamete_p{color: blue;
-  font-size: 15px;
-  font-style: bold;
-  font-family: Verdana;
-  word-wrap: break-word;
-  }"
-                                               
-  )),
                             
   h4(tags$strong("Paternal gamete(s):"),
            br(), br(),
@@ -105,55 +81,30 @@ ui <- fluidPage(theme = shinytheme("united"),
  
  fluidRow(
                              
- div(tags$strong("Punnett square output"), style = 'text-indent: 40px;
-             font-size: 150%'),
-                             
  column(10,
-        
+        tags$strong("Punnett square output", style = 'text-indent: 40px; 
+             font-size: 150%'),
         reactableOutput("punnett"),
         
         br(),br(),
         
-        div(tags$strong("Summary of progeny genotypes in the Punnett square:"), 
-            style = "text-indent: 20px; color: blue; font-size: 120%"),
+        tags$strong("Summary of progeny genotypes in the Punnett square:",
+                        style = "text-indent: 20px; color: blue; font-size: 120%"),
         reactableOutput("summary"),   
         
         br(), br(),
-        
-        tags$head(tags$style("#progeny{color: blue;
-                font-size: 18px;
-                font-style: bold;
-                font-family: Verdana;
-                word-wrap: break-word;
-                }"
-                                                         
-    )),
+
     htmlOutput("progeny")
           
    )
    
- ),
- 
- 
- hr(),
-                           
-                           
-  tags$h5("Copyright ", HTML("&copy"),"2021 | Alexander Wireko Kena, PhD.",  
-                                   align = 'center', style = 'color: blue')
-                           
+ )
 ),
   
  tabPanel("Phenotype",
    fluidRow(
     br(),
     div(id = "dom",
-            
-        tags$style( "#dom{
-         color: orange;
-         font-size: 14px;
-         font-style: bold;
-         font-family: Verdana;
-        "),
             
       column(5,
       
@@ -172,9 +123,7 @@ ui <- fluidPage(theme = shinytheme("united"),
       
       tags$strong(helpText("For all digenic interactions, the number of loci = 2.", 
                style = 'color: red;')),
-      
-      tags$head(
-               tags$style(HTML('#pheno{background-color: green}'))),
+
              actionButton("pheno", "View phenotypes"),
       
       tags$strong(helpText("Generate gametes and crosses first in the Cross panel.", 
@@ -185,15 +134,6 @@ ui <- fluidPage(theme = shinytheme("united"),
   div(
     column(6,offset = 1,
            
-           tags$head(tags$style("#pheno_ratio{color: blue;
-  font-size: 15px;
-  font-style: bold;
-  font-family: Verdana;
-  word-wrap: break-word;
-  }"
-                                
-           )),
-           
            h4(tags$strong("Phenotypic ratio:"),
               br(), br(),
               htmlOutput("pheno_ratio")), 
@@ -203,9 +143,10 @@ ui <- fluidPage(theme = shinytheme("united"),
   hr(),
   
   fluidRow(
-    div(tags$strong("Punnett square output"), style = 'text-indent: 40px;
-             font-size: 150%'),
+    
     column(12,
+    tags$strong("Punnett square output", style = 'text-indent: 40px;
+             font-size: 150%'),
     plotOutput("comp_plot")
     
   )
